@@ -7,9 +7,9 @@ using UnityEngine.UI;
 [Serializable][CreateAssetMenu]
 public class MenuButtonConfig : MenuElementConfig
 {
-    public void Awake()
+    public override void Awake()
     {
-        AutoGenerateArgs();
+        base.Awake();
         if (initialized) return;
         buttonColorBlock.highlightedColor = new Color(1, 1, 1, 1);
         buttonColorBlock.normalColor = new Color(1, 1, 1, 1);
@@ -78,7 +78,12 @@ public abstract class MenuElementConfig : ScriptableObject
 {
     public string[] Arguments { get; private set; }
 
-    protected void AutoGenerateArgs()
+    public virtual void Awake()
+    {
+        AutoGenerateArgs();
+    }
+
+    private void AutoGenerateArgs()
     {
         var methods = GetType().GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic);
         var args = methods.Select(t => t.Name).ToList();

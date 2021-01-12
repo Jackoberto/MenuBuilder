@@ -7,15 +7,15 @@ using UnityEngine.UI;
 [Serializable][CreateAssetMenu]
 public class TextConfig : MenuElementConfig
 {
-     private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         if (initialized) return;
-
         font = Resources.GetBuiltinResource<Font>("Arial.ttf");
         initialized = true;
     }
 
-    public override void Create(string name, Menu menu)
+    public override void Create(string name, Menu menu, string arg)
     {
         GameObject textObject = new GameObject();
         textObject.name = menu.label;
