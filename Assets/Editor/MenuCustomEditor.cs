@@ -20,9 +20,14 @@ public class MenuCustomEditor : Editor
         width = GUILayout.Width(Screen.width * 0.15f);
         GUILayout.Label("Element #" + menu.elementToCreate, width);
         GUILayout.EndHorizontal();
-        if (GUILayout.Button($"Add {menu.menuElementConfigs[menu.elementToCreate].name}"))
+        if (menu.menuElementConfigs.Length > 0 && menu.menuElementConfigs[menu.elementToCreate] != null)
         {
-            menu.menuElementConfigs[menu.elementToCreate].Create(menu.label, menu);
+            var subString = $"{menu.menuElementConfigs[menu.elementToCreate].name}";
+            var buttonText = $"Add {subString}";
+            if (GUILayout.Button(buttonText))
+            {
+                menu.menuElementConfigs[menu.elementToCreate].Create(menu.label, menu);
+            }
         }
         if (GUILayout.Button("Remove Button"))
         {
