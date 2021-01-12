@@ -8,7 +8,7 @@ public class Menu : MonoBehaviour
 {
     public List<GameObject> buttons = new List<GameObject>();
     public MenuButton currentConfig;
-    public MenuElementConfig[] menuElementConfigs;
+    public MenuElementConfig[] menuElementConfigs = new MenuElementConfig[1];
     public string label;
     public int menuButtonToRemove;
     [HideInInspector] public int elementToCreate;
