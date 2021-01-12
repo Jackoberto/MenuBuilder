@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,10 @@ public class Menu : MonoBehaviour
 {
     public List<GameObject> buttons = new List<GameObject>();
     public MenuButton currentConfig;
+    public MenuElementConfig[] menuElementConfigs;
+    public string label;
     public int menuButtonToRemove;
+    [HideInInspector] public int elementToCreate;
 
     private void ButtonClick(GameObject otherGameObject)
     {
@@ -31,7 +35,7 @@ public class Menu : MonoBehaviour
 
     private GameObject CreateSubMenu(Transform otherTransform)
     {
-        GameObject subMenu = new GameObject {name = "Sub Menu " + currentConfig.label};
+        GameObject subMenu = new GameObject {name = "Sub Menu " + label};
         subMenu.transform.parent = otherTransform;
         var rect = subMenu.AddComponent<RectTransform>();
         rect.anchoredPosition = Vector2.zero;
@@ -73,7 +77,7 @@ public class Menu : MonoBehaviour
         var textComponent = textObject.AddComponent<Text>();
         image.type = Image.Type.Sliced;
         image.color = menuButtonConfig.imageColor;
-        image.sprite = menuButton.image;
+        image.sprite = menuButtonConfig.image;
         buttonComponent.colors = menuButtonConfig.buttonColorBlock;
         textObject.GetComponent<RectTransform>().sizeDelta = button.GetComponent<RectTransform>().sizeDelta;
         textComponent.font = menuButtonConfig.font;
@@ -92,19 +96,19 @@ public class Menu : MonoBehaviour
         button.transform.parent = transform;
         GameObject textObject = new GameObject();
         textObject.transform.parent = button.transform;
-        button.name = menuButton.label;
+        button.name = label;
         button.AddComponent<RectTransform>().sizeDelta = currentConfig.menuButtonConfig.dimensions;
         var buttonComponent = button.AddComponent<Button>();
         var image = button.AddComponent<Image>();
         var textComponent = textObject.AddComponent<Text>();
         image.type = Image.Type.Sliced;
         image.color = menuButtonConfig.imageColor;
-        image.sprite = menuButton.image;
+        image.sprite = menuButtonConfig.image;
         buttonComponent.colors = menuButtonConfig.buttonColorBlock;
         textObject.GetComponent<RectTransform>().sizeDelta = button.GetComponent<RectTransform>().sizeDelta;
         textComponent.font = menuButtonConfig.font;
         textComponent.fontSize = menuButtonConfig.fontSize;
-        textComponent.text = menuButton.label;
+        textComponent.text = label;
         textComponent.alignment = menuButtonConfig.textAnchor;
         textComponent.resizeTextForBestFit = menuButtonConfig.resizeForBestFit;
         textComponent.color = menuButtonConfig.fontColor;
@@ -112,4 +116,17 @@ public class Menu : MonoBehaviour
             UnityEventTools.AddObjectPersistentListener(button.GetComponent<Button>().onClick, ButtonClick, CreateSubMenu(button.transform));
         return button;
     }
+
+    private void OnValidate()
+    {
+        elementToCreate = Mathf.Clamp(elementToCreate, 0, menuElementConfigs.Length - 1);
+    }
+}
+
+public enum MenuElements
+{
+    Button,
+    Background,
+    Slider,
+    Dropdown,
 }

@@ -8,9 +8,21 @@ public class MenuCustomEditor : Editor
     {
         var menu = (Menu) target;
         DrawDefaultInspector();
-        if (GUILayout.Button("Add Button"))
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Choose Element:");
+        GUILayout.FlexibleSpace();
+        var height = GUILayout.Height(20);
+        var width = GUILayout.Width(Screen.width * 0.5f);
+        menu.elementToCreate = Mathf.Clamp(Mathf.RoundToInt(GUILayout.HorizontalSlider(menu.elementToCreate, 0, menu.menuElementConfigs.Length - 1, 
+            new GUILayoutOption[]{height, width})
+        ), 0, menu.menuElementConfigs.Length);
+        GUILayout.FlexibleSpace();
+        width = GUILayout.Width(Screen.width * 0.15f);
+        GUILayout.Label("Element #" + menu.elementToCreate, width);
+        GUILayout.EndHorizontal();
+        if (GUILayout.Button($"Add {menu.menuElementConfigs[menu.elementToCreate].name}"))
         {
-            menu.CreateButton();
+            menu.menuElementConfigs[menu.elementToCreate].Create(menu.label);
         }
         if (GUILayout.Button("Remove Button"))
         {

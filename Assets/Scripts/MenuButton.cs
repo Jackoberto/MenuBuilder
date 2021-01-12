@@ -1,10 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class MenuButton
 {
-    public string label;
-    public Sprite image;
     public bool createSubMenu;
     public MenuButtonConfig menuButtonConfig;
 }

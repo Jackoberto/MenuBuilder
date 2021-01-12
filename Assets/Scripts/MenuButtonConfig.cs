@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable][CreateAssetMenu]
-public class MenuButtonConfig : ScriptableObject
+public class MenuButtonConfig : MenuElementConfig
 {
     private void Awake()
     {
@@ -19,13 +19,27 @@ public class MenuButtonConfig : ScriptableObject
         initialized = true;
     }
 
+    public override void Create(string name)
+    {
+        
+    }
+
     public Vector2 dimensions = new Vector2(100, 100);
     public Color imageColor = new Color(1, 1, 1,1);
     public ColorBlock buttonColorBlock;
+    public Sprite image;
     public Color fontColor = new Color(0, 0, 0,1);
     public TextAnchor textAnchor = TextAnchor.MiddleCenter;
     public Font font;
     public int fontSize = 14;
     public bool resizeForBestFit;
     [HideInInspector] public bool initialized;
+}
+
+public class MenuElementConfig : ScriptableObject
+{
+    public virtual void Create(string name)
+    {
+        
+    }
 }
