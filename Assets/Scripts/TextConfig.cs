@@ -15,7 +15,7 @@ public class TextConfig : MenuElementConfig
         initialized = true;
     }
 
-    public override void Create(string name, Menu menu, string arg)
+    public override void Create(string name, Menu menu, string[] args)
     {
         GameObject textObject = new GameObject();
         textObject.name = menu.label;

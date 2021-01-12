@@ -22,7 +22,7 @@ public class MenuButtonConfig : MenuElementConfig
         initialized = true;
     }
 
-    public override void Create(string name, Menu menu, string arg)
+    public override void Create(string name, Menu menu, string[] args)
     {
         GameObject button = new GameObject();
         button.transform.parent = menu.transform;
@@ -44,7 +44,7 @@ public class MenuButtonConfig : MenuElementConfig
         textComponent.alignment = textAnchor;
         textComponent.resizeTextForBestFit = resizeForBestFit;
         textComponent.color = fontColor;
-        base.Create(name, menu, arg);
+        base.Create(name, menu, args);
     }
 
     private void AddStart()
@@ -77,6 +77,7 @@ public class MenuButtonConfig : MenuElementConfig
 public abstract class MenuElementConfig : ScriptableObject
 {
     public string[] Arguments { get; private set; }
+    public bool canCombineArgs;
 
     public virtual void Awake()
     {
@@ -90,14 +91,17 @@ public abstract class MenuElementConfig : ScriptableObject
         Arguments = args.ToArray();
     }
 
-    public virtual void Create(string name, Menu menu, string arg)
+    public virtual void Create(string name, Menu menu, string[] args)
     {
-        CheckArg(arg);
+        foreach (var arg in args)
+        {
+            CheckArg(arg);
+        }
     }
 
     private void CheckArg(string arg)
     {
         var method = typeof(MenuButtonConfig).GetMethod(arg, BindingFlags.Instance | BindingFlags.NonPublic);
-        method?.Invoke(this, new object[0]);
+        method?.Invoke(this, null);
     }
 }
