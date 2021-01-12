@@ -10,8 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5869ca022b307245a1ee0163f147931, type: 3}
-  m_Name: sex
+  m_Name: Default Menu Background Config
   m_EditorClassIdentifier: 
+  dimensions: {x: 400, y: 400}
   backgroundImage: {fileID: 0}
   backgroundColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundMaterial: {fileID: 0}
+  raycastTarget: 0
+  raycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  maskable: 0
