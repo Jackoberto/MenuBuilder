@@ -22,7 +22,7 @@ public class MenuCustomEditor : Editor
         GUILayout.EndHorizontal();
         if (GUILayout.Button($"Add {menu.menuElementConfigs[menu.elementToCreate].name}"))
         {
-            menu.menuElementConfigs[menu.elementToCreate].Create(menu.label);
+            menu.menuElementConfigs[menu.elementToCreate].Create(menu.label, menu);
         }
         if (GUILayout.Button("Remove Button"))
         {

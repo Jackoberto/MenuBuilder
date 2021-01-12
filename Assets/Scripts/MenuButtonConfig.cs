@@ -19,7 +19,7 @@ public class MenuButtonConfig : MenuElementConfig
         initialized = true;
     }
 
-    public override void Create(string name)
+    public override void Create(string name, Menu menu)
     {
         
     }
@@ -38,7 +38,7 @@ public class MenuButtonConfig : MenuElementConfig
 
 public class MenuElementConfig : ScriptableObject
 {
-    public virtual void Create(string name)
+    public virtual void Create(string name, Menu menu)
     {
         
     }
