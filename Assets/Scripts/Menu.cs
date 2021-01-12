@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     public List<GameObject> buttons = new List<GameObject>();
-    public MenuButton currentConfig;
     public MenuElementConfig[] menuElementConfigs = new MenuElementConfig[2];
     public string label;
     public int menuButtonToRemove;
@@ -33,7 +32,7 @@ public class Menu : MonoBehaviour
         buttons.RemoveAt(menuButtonToRemove);
     }
 
-    private GameObject CreateSubMenu(Transform otherTransform)
+    /*private GameObject CreateSubMenu(Transform otherTransform)
     {
         GameObject subMenu = new GameObject {name = "Sub Menu " + label};
         subMenu.transform.parent = otherTransform;
@@ -50,72 +49,7 @@ public class Menu : MonoBehaviour
         subMenu.Toggle();
         menu.CreateBackButton();
         return subMenu;
-    }
-    
-    public void CreateButton()
-    {
-        var button = CreateButton(currentConfig.menuButtonConfig, currentConfig);
-        buttons.Add(button);
-    }
-
-    private void CreateBackButton()
-    {
-        var button = CreateBackButton(currentConfig.menuButtonConfig, currentConfig);
-        buttons.Add(button);
-    }
-    
-    private GameObject CreateBackButton(MenuButtonConfig menuButtonConfig, MenuButton menuButton){
-
-        GameObject button = new GameObject();
-        button.transform.parent = transform;
-        GameObject textObject = new GameObject();
-        textObject.transform.parent = button.transform;
-        button.name = "Back";
-        button.AddComponent<RectTransform>().sizeDelta = currentConfig.menuButtonConfig.dimensions;
-        var buttonComponent = button.AddComponent<Button>();
-        var image = button.AddComponent<Image>();
-        var textComponent = textObject.AddComponent<Text>();
-        image.type = Image.Type.Sliced;
-        image.color = menuButtonConfig.imageColor;
-        image.sprite = menuButtonConfig.image;
-        buttonComponent.colors = menuButtonConfig.buttonColorBlock;
-        textObject.GetComponent<RectTransform>().sizeDelta = button.GetComponent<RectTransform>().sizeDelta;
-        textComponent.font = menuButtonConfig.font;
-        textComponent.fontSize = menuButtonConfig.fontSize;
-        textComponent.text = "Back";
-        textComponent.alignment = menuButtonConfig.textAnchor;
-        textComponent.resizeTextForBestFit = menuButtonConfig.resizeForBestFit;
-        textComponent.color = menuButtonConfig.fontColor;
-        UnityEventTools.AddObjectPersistentListener(button.GetComponent<Button>().onClick, GetComponentInParent<Menu>().ButtonClick, CreateSubMenu(button.transform));
-        return button;
-    }
-
-    private GameObject CreateButton(MenuButtonConfig menuButtonConfig, MenuButton menuButton){
-
-        GameObject button = new GameObject();
-        button.transform.parent = transform;
-        GameObject textObject = new GameObject();
-        textObject.transform.parent = button.transform;
-        button.name = label;
-        button.AddComponent<RectTransform>().sizeDelta = currentConfig.menuButtonConfig.dimensions;
-        var buttonComponent = button.AddComponent<Button>();
-        var image = button.AddComponent<Image>();
-        var textComponent = textObject.AddComponent<Text>();
-        image.type = Image.Type.Sliced;
-        image.color = menuButtonConfig.imageColor;
-        image.sprite = menuButtonConfig.image;
-        buttonComponent.colors = menuButtonConfig.buttonColorBlock;
-        textObject.GetComponent<RectTransform>().sizeDelta = button.GetComponent<RectTransform>().sizeDelta;
-        textComponent.font = menuButtonConfig.font;
-        textComponent.fontSize = menuButtonConfig.fontSize;
-        textComponent.text = label;
-        textComponent.alignment = menuButtonConfig.textAnchor;
-        textComponent.resizeTextForBestFit = menuButtonConfig.resizeForBestFit;
-        textComponent.color = menuButtonConfig.fontColor;
-        if (currentConfig.createSubMenu)
-            UnityEventTools.AddObjectPersistentListener(button.GetComponent<Button>().onClick, ButtonClick, CreateSubMenu(button.transform));
-        return button;
-    }
+    }*/
 
     private void OnValidate()
     {

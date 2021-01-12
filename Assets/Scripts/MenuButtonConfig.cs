@@ -19,32 +19,29 @@ public class MenuButtonConfig : MenuElementConfig
         initialized = true;
     }
 
-    /*public override void Create(string name, Menu menu)
+    public override void Create(string name, Menu menu)
     {
         GameObject button = new GameObject();
-        button.transform.parent = transform;
+        button.transform.parent = menu.transform;
         GameObject textObject = new GameObject();
         textObject.transform.parent = button.transform;
-        button.name = label;
-        button.AddComponent<RectTransform>().sizeDelta = currentConfig.menuButtonConfig.dimensions;
+        button.name = menu.label;
+        button.AddComponent<RectTransform>().sizeDelta = dimensions;
         var buttonComponent = button.AddComponent<Button>();
         var image = button.AddComponent<Image>();
         var textComponent = textObject.AddComponent<Text>();
         image.type = Image.Type.Sliced;
-        image.color = menuButtonConfig.imageColor;
-        image.sprite = menuButtonConfig.image;
-        buttonComponent.colors = menuButtonConfig.buttonColorBlock;
+        image.color = imageColor;
+        image.sprite = this.image;
+        buttonComponent.colors = buttonColorBlock;
         textObject.GetComponent<RectTransform>().sizeDelta = button.GetComponent<RectTransform>().sizeDelta;
-        textComponent.font = menuButtonConfig.font;
-        textComponent.fontSize = menuButtonConfig.fontSize;
-        textComponent.text = label;
-        textComponent.alignment = menuButtonConfig.textAnchor;
-        textComponent.resizeTextForBestFit = menuButtonConfig.resizeForBestFit;
-        textComponent.color = menuButtonConfig.fontColor;
-        if (currentConfig.createSubMenu) 
-            UnityEventTools.AddObjectPersistentListener(button.GetComponent<Button>().onClick, ButtonClick, CreateSubMenu(button.transform));
-        return button;
-    }*/
+        textComponent.font = font;
+        textComponent.fontSize = fontSize;
+        textComponent.text = menu.label;
+        textComponent.alignment = textAnchor;
+        textComponent.resizeTextForBestFit = resizeForBestFit;
+        textComponent.color = fontColor;
+    }
 
     public Vector2 dimensions = new Vector2(100, 100);
     public Color imageColor = new Color(1, 1, 1,1);
