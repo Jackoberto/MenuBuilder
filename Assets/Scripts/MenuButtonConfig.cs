@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable][CreateAssetMenu]
 public class MenuButtonConfig : MenuElementConfig
 {
-    private void Awake()
+    public void Awake()
     {
+        AutoGenerateArgs();
         if (initialized) return;
         buttonColorBlock.highlightedColor = new Color(1, 1, 1, 1);
         buttonColorBlock.normalColor = new Color(1, 1, 1, 1);
@@ -19,7 +22,7 @@ public class MenuButtonConfig : MenuElementConfig
         initialized = true;
     }
 
-    public override void Create(string name, Menu menu)
+    public override void Create(string name, Menu menu, string arg)
     {
         GameObject button = new GameObject();
         button.transform.parent = menu.transform;
@@ -41,8 +44,24 @@ public class MenuButtonConfig : MenuElementConfig
         textComponent.alignment = textAnchor;
         textComponent.resizeTextForBestFit = resizeForBestFit;
         textComponent.color = fontColor;
+        base.Create(name, menu, arg);
     }
 
+    private void AddStart()
+    {
+        Debug.Log(MethodBase.GetCurrentMethod().ToString());
+    }
+    
+    private void AddSubMenu()
+    {
+        Debug.Log(MethodBase.GetCurrentMethod().ToString());
+    }
+    
+    private void AddQuit()
+    {
+        Debug.Log(MethodBase.GetCurrentMethod().ToString());
+    }
+    
     public Vector2 dimensions = new Vector2(100, 100);
     public Color imageColor = new Color(1, 1, 1,1);
     public ColorBlock buttonColorBlock;
@@ -55,10 +74,25 @@ public class MenuButtonConfig : MenuElementConfig
     [HideInInspector] public bool initialized;
 }
 
-public class MenuElementConfig : ScriptableObject
+public abstract class MenuElementConfig : ScriptableObject
 {
-    public virtual void Create(string name, Menu menu)
+    public string[] Arguments { get; private set; }
+
+    protected void AutoGenerateArgs()
     {
-        
+        var methods = GetType().GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic);
+        var args = methods.Select(t => t.Name).ToList();
+        Arguments = args.ToArray();
+    }
+
+    public virtual void Create(string name, Menu menu, string arg)
+    {
+        CheckArg(arg);
+    }
+
+    private void CheckArg(string arg)
+    {
+        var method = typeof(MenuButtonConfig).GetMethod(arg, BindingFlags.Instance | BindingFlags.NonPublic);
+        method?.Invoke(this, new object[0]);
     }
 }
