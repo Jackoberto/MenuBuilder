@@ -16,8 +16,8 @@ public class Menu : MonoBehaviour
         {
             if (otherGameObject.transform.parent == button.transform)
             {
-                button.GetComponent<Image>().enabled = false;
-                button.GetComponentInChildren<Text>().enabled = false;
+                button.GetComponent<Image>().Toggle();
+                button.GetComponentInChildren<Text>().Toggle();
             }
             else button.Toggle();
         }
@@ -44,16 +44,49 @@ public class Menu : MonoBehaviour
         verticalLayoutGroup.childAlignment = TextAnchor.MiddleCenter;
         verticalLayoutGroup.childForceExpandHeight = false;
         subMenu.Toggle();
+        menu.CreateBackButton();
         return subMenu;
     }
     
     public void CreateButton()
     {
         var button = CreateButton(currentConfig.menuButtonConfig, currentConfig);
-        buttons.Add(button.gameObject);
+        buttons.Add(button);
     }
 
-    private Button CreateButton(MenuButtonConfig menuButtonConfig, MenuButton menuButton){
+    private void CreateBackButton()
+    {
+        var button = CreateBackButton(currentConfig.menuButtonConfig, currentConfig);
+        buttons.Add(button);
+    }
+    
+    private GameObject CreateBackButton(MenuButtonConfig menuButtonConfig, MenuButton menuButton){
+
+        GameObject button = new GameObject();
+        button.transform.parent = transform;
+        GameObject textObject = new GameObject();
+        textObject.transform.parent = button.transform;
+        button.name = "Back";
+        button.AddComponent<RectTransform>().sizeDelta = currentConfig.menuButtonConfig.dimensions;
+        var buttonComponent = button.AddComponent<Button>();
+        var image = button.AddComponent<Image>();
+        var textComponent = textObject.AddComponent<Text>();
+        image.type = Image.Type.Sliced;
+        image.color = menuButtonConfig.imageColor;
+        image.sprite = menuButton.image;
+        buttonComponent.colors = menuButtonConfig.buttonColorBlock;
+        textObject.GetComponent<RectTransform>().sizeDelta = button.GetComponent<RectTransform>().sizeDelta;
+        textComponent.font = menuButtonConfig.font;
+        textComponent.fontSize = menuButtonConfig.fontSize;
+        textComponent.text = "Back";
+        textComponent.alignment = menuButtonConfig.textAnchor;
+        textComponent.resizeTextForBestFit = menuButtonConfig.resizeForBestFit;
+        textComponent.color = menuButtonConfig.fontColor;
+        UnityEventTools.AddObjectPersistentListener(button.GetComponent<Button>().onClick, GetComponentInParent<Menu>().ButtonClick, CreateSubMenu(button.transform));
+        return button;
+    }
+
+    private GameObject CreateButton(MenuButtonConfig menuButtonConfig, MenuButton menuButton){
 
         GameObject button = new GameObject();
         button.transform.parent = transform;
@@ -77,6 +110,6 @@ public class Menu : MonoBehaviour
         textComponent.color = menuButtonConfig.fontColor;
         if (currentConfig.createSubMenu)
             UnityEventTools.AddObjectPersistentListener(button.GetComponent<Button>().onClick, ButtonClick, CreateSubMenu(button.transform));
-        return button.GetComponent<Button>();
+        return button;
     }
 }
