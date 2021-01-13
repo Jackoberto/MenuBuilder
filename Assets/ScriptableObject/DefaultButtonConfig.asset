@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultButtonConfig
   m_EditorClassIdentifier: 
   canCombineArgs: 1
-  dimensions: {x: 160, y: 30}
+  dimensions: {x: 451.62, y: 30}
   imageColor: {r: 1, g: 1, b: 1, a: 1}
   buttonColorBlock:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}

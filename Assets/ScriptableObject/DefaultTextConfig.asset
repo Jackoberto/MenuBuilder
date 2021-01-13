@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85173e5f8e537d541af57d49ef1f4f26, type: 3}
   m_Name: DefaultTextConfig
   m_EditorClassIdentifier: 
+  canCombineArgs: 0
   dimensions: {x: 100, y: 100}
   fontColor: {r: 0, g: 0, b: 0, a: 1}
   textAnchor: 4

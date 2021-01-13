@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,16 +55,19 @@ public class MenuButtonConfig : MenuElementConfig
         menuElement.GetComponent<RectTransform>().sizeDelta = dimensions;
     }
 
+    [Description("Adds The Start Script To The Button Press")]
     private void AddStart()
     {
         Debug.Log(MethodBase.GetCurrentMethod().ToString());
     }
     
+    [Description("Adds A Sub Menu That Opens On Button Press")]
     private void AddSubMenu()
     {
         Debug.Log(MethodBase.GetCurrentMethod().ToString());
     }
 
+    [Description("Adds The Quit Script To The Button Press")]
     private void AddQuit()
     {
         Debug.Log(MethodBase.GetCurrentMethod().ToString());
@@ -80,56 +83,4 @@ public class MenuButtonConfig : MenuElementConfig
     public int fontSize = 14;
     public bool resizeForBestFit;
     [HideInInspector] public bool initialized;
-}
-
-public abstract class MenuElementConfig : ScriptableObject
-{
-    public string[] Arguments { get; private set; }
-    public bool canCombineArgs;
-
-    public virtual void Awake()
-    {
-        AutoGenerateArgs();
-    }
-    
-    public virtual void UpdateElements()
-    {
-        var menuElements = FindObjectsOfType<MenuElement>().ToList();
-        foreach (var menuElement in menuElements.Where(menuElement => menuElement.menuElementConfig == this))
-        {
-            ApplyUpdate(menuElement);
-        }
-    }
-
-    public virtual void ApplyUpdate(MenuElement menuElement)
-    {
-        
-    }
-
-    protected void AddMenuElement(GameObject gameObject)
-    {
-        var menuElement = gameObject.AddComponent<MenuElement>();
-        menuElement.menuElementConfig = this;
-    }
-
-    private void AutoGenerateArgs()
-    {
-        var methods = GetType().GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic);
-        var args = methods.Select(t => t.Name).ToList();
-        Arguments = args.ToArray();
-    }
-
-    public virtual void Create(string name, Menu menu, string[] args)
-    {
-        foreach (var arg in args)
-        {
-            CheckArg(arg);
-        }
-    }
-
-    private void CheckArg(string arg)
-    {
-        var method = typeof(MenuButtonConfig).GetMethod(arg, BindingFlags.Instance | BindingFlags.NonPublic);
-        method?.Invoke(this, null);
-    }
 }

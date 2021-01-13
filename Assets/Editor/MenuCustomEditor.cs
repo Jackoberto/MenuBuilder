@@ -27,18 +27,21 @@ public class MenuCustomEditor : Editor
         var args = menu.menuElementConfigs[menu.elementToCreate].Arguments.ToList();
         args.Add("Default");
         args.Reverse();
+        var toolTips = menu.menuElementConfigs[menu.elementToCreate].Descriptions.ToList();
+        toolTips.Add("Creates The Default Menu Element");
+        toolTips.Reverse();
         if (menu.menuElementConfigs[menu.elementToCreate].canCombineArgs)
         {
            if (_optionsTicked.Length != args.Count) 
                _optionsTicked = new bool[args.Count];
            for (var i = 1; i < args.Count; i++)
            {
-               _optionsTicked[i] = GUILayout.Toggle(_optionsTicked[i], args[i]);
+               _optionsTicked[i] = GUILayout.Toggle(_optionsTicked[i], new GUIContent(args[i], toolTips[i]));
            } 
         }
         else
         {
-            _index = EditorGUILayout.Popup(_index, args.ToArray());
+            _index = EditorGUILayout.Popup(new GUIContent(args[_index], toolTips[_index]), _index, args.ToArray());
             _index = Mathf.Clamp(_index, 0, args.Count - 1); 
         }
         
