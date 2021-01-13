@@ -19,6 +19,7 @@ public class TextConfig : MenuElementConfig
     {
         GameObject textObject = new GameObject();
         textObject.name = menu.label;
+        textObject.transform.parent = menu.transform;
         textObject.AddComponent<RectTransform>().sizeDelta = dimensions;
         var textComponent = textObject.AddComponent<Text>();
         textObject.GetComponent<RectTransform>().sizeDelta = textObject.GetComponent<RectTransform>().sizeDelta;
@@ -28,6 +29,7 @@ public class TextConfig : MenuElementConfig
         textComponent.alignment = textAnchor;
         textComponent.resizeTextForBestFit = resizeForBestFit;
         textComponent.color = fontColor;
+        AddMenuElement(textObject);
     }
 
     public Vector2 dimensions = new Vector2(100, 100);

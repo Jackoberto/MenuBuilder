@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
@@ -44,7 +45,14 @@ public class MenuButtonConfig : MenuElementConfig
         textComponent.alignment = textAnchor;
         textComponent.resizeTextForBestFit = resizeForBestFit;
         textComponent.color = fontColor;
+        AddMenuElement(button);
         base.Create(name, menu, args);
+    }
+
+    public override void ApplyUpdate(MenuElement menuElement)
+    {
+        Debug.Log(MethodBase.GetCurrentMethod().ToString());
+        menuElement.GetComponent<RectTransform>().sizeDelta = dimensions;
     }
 
     private void AddStart()
@@ -56,7 +64,7 @@ public class MenuButtonConfig : MenuElementConfig
     {
         Debug.Log(MethodBase.GetCurrentMethod().ToString());
     }
-    
+
     private void AddQuit()
     {
         Debug.Log(MethodBase.GetCurrentMethod().ToString());
@@ -82,6 +90,26 @@ public abstract class MenuElementConfig : ScriptableObject
     public virtual void Awake()
     {
         AutoGenerateArgs();
+    }
+    
+    public virtual void UpdateElements()
+    {
+        var menuElements = FindObjectsOfType<MenuElement>().ToList();
+        foreach (var menuElement in menuElements.Where(menuElement => menuElement.menuElementConfig == this))
+        {
+            ApplyUpdate(menuElement);
+        }
+    }
+
+    public virtual void ApplyUpdate(MenuElement menuElement)
+    {
+        
+    }
+
+    protected void AddMenuElement(GameObject gameObject)
+    {
+        var menuElement = gameObject.AddComponent<MenuElement>();
+        menuElement.menuElementConfig = this;
     }
 
     private void AutoGenerateArgs()

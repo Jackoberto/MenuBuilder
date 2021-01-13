@@ -54,7 +54,8 @@ public class MenuCustomEditor : Editor
                 {
                     menu.menuElementConfigs[menu.elementToCreate].Create(menu.label, menu, ResolveTickedArgs(args));
                 }
-                menu.menuElementConfigs[menu.elementToCreate].Create(menu.label, menu,
+                else 
+                    menu.menuElementConfigs[menu.elementToCreate].Create(menu.label, menu,
                     _index != 0 ? new [] {args[_index]} : new []{""});
             }
         }
