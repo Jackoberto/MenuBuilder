@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6dda0d3e9d4c8d85c9bf72c56cf354, type: 3}
+  m_Name: DefaultSliderConfig
+  m_EditorClassIdentifier: 
+  canCombineArgs: 0
+  dimensions: {x: 160, y: 20}
+  sliderFillColor: {r: 1, g: 1, b: 1, a: 1}
+  sliderColorBlock:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.78, g: 0.78, b: 0.78, a: 1}
+    m_SelectedColor: {r: 0.96, g: 0.96, b: 0.96, a: 1}
+    m_DisabledColor: {r: 0.78, g: 0.78, b: 0.78, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  backgroundImage: {fileID: 0}
+  fillImage: {fileID: 0}
+  sliderHandleImage: {fileID: 0}
+  sliderMinimumValue: 0
+  sliderMaximumValue: 0
+  initialized: 1
