@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,19 +53,19 @@ public class MenuButtonConfig : MenuElementConfig
         menuElement.GetComponent<RectTransform>().sizeDelta = dimensions;
     }
 
-    [Description("Adds The Start Script To The Button Press")]
+    [ExtraOption("Adds The Start Script To The Button Press")]
     private void AddStart()
     {
         Debug.Log(MethodBase.GetCurrentMethod().ToString());
     }
     
-    [Description("Adds A Sub Menu That Opens On Button Press")]
+    [ExtraOption("Adds A Sub Menu That Opens On Button Press")]
     private void AddSubMenu()
     {
         Debug.Log(MethodBase.GetCurrentMethod().ToString());
     }
 
-    [Description("Adds The Quit Script To The Button Press")]
+    [ExtraOption("Adds The Quit Script To The Button Press")]
     private void AddQuit()
     {
         Debug.Log(MethodBase.GetCurrentMethod().ToString());

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
@@ -38,9 +37,14 @@ public abstract class MenuElementConfig : ScriptableObject
     private void AutoGenerateArgs()
     {
         var methods = GetType().GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic)
-            .ToList().Where(method => method.GetCustomAttributes(typeof(DescriptionAttribute)).Any());
-        var descriptions = methods.Select(method => method.GetCustomAttribute<DescriptionAttribute>().Description).ToList();
-        var args = methods.Select(t => t.Name).ToList();
+            .ToList().Where(method => method.GetCustomAttributes(typeof(ExtraOptionAttribute)).Any());
+        var descriptions = new List<string>();
+        var args = new List<string>();
+        foreach (var method in methods) 
+        {
+            descriptions.Add(method.GetCustomAttribute<ExtraOptionAttribute>().Description);
+            args.Add(method.Name);
+        }
         Descriptions = descriptions.ToArray();
         Arguments = args.ToArray();
     }
