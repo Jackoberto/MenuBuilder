@@ -7,9 +7,9 @@ using Button = MenuBuilder.Configs.Button;
 
 namespace MenuBuilder.Editor
 {
-    public class MenuBuild : UnityEditor.Editor
+    public class MenuBuilder : UnityEditor.Editor
     {
-        [MenuItem("GameObject/MenuBuilder", false, 0)]
+        [MenuItem("GameObject/MenuBuilder/Empty", false, 0)]
         private static GameObject CreateMenu()
         {
             var canvas = FindObjectOfType<Canvas>();
@@ -39,16 +39,37 @@ namespace MenuBuilder.Editor
             return menuBuilder;
         }
 
-        [MenuItem("GameObject/MenuBuilderTemplates/Main Menu", false, 0)]
-        private static void CreateMainMenu()
+        [MenuItem("GameObject/MenuBuilder/Main Menu", false, 0)]
+        private static GameObject CreateMainMenu()
         {
             var menu = CreateMenu();
-            var allAssetPaths = AssetDatabase.FindAssets("Default Button Config");
-            var paths = allAssetPaths.Select(AssetDatabase.GUIDToAssetPath).ToList();
-            var button = paths.Select(AssetDatabase.LoadAssetAtPath<Button>).ToArray()[0];
+            var button = GetAssetFromName<Button>("Default Button Config");
             button.Create("Start", menu.GetComponent<Menu>(), new []{"AddStart"});
             button.Create("Options", menu.GetComponent<Menu>(), new []{"AddSubMenu"});
             button.Create("Quit", menu.GetComponent<Menu>(), new []{"AddQuit"});
+            var background = GetAssetFromName<Background>("Default Menu Background Config");
+            background.Create("Background", menu.GetComponent<Menu>(), new []{"SameSize"});
+            return menu;
+        }
+
+        private static T GetAssetFromName<T>(string name) where T : Object
+        {
+            var findAssets = AssetDatabase.FindAssets(name);
+            var paths = findAssets.Select(AssetDatabase.GUIDToAssetPath).ToList();
+            var asset = paths.Select(AssetDatabase.LoadAssetAtPath<T>).ToArray()[0];
+            return asset;
+        }
+        
+        [MenuItem("GameObject/MenuBuilder/Pause Menu", false, 0)]
+        private static void CreatePauseMenu()
+        {
+            var menu = CreateMenu();
+            var button = GetAssetFromName<Button>("Default Button Config");
+            button.Create("Start", menu.GetComponent<Menu>(), new []{"AddStart"});
+            button.Create("Options", menu.GetComponent<Menu>(), new []{"AddSubMenu"});
+            button.Create("Quit", menu.GetComponent<Menu>(), new []{"AddQuit"});
+            var background = GetAssetFromName<Background>("Default Menu Background Config");
+            background.Create("Background", menu.GetComponent<Menu>(), new string[0]);
         }
     }
 }
