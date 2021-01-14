@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
@@ -12,7 +13,7 @@ public abstract class MenuElementConfig : ScriptableObject
 
     public virtual void Awake()
     {
-        AutoGenerateArgs();
+        
     }
 
     protected void AddMenuElement(GameObject gameObject)
@@ -44,9 +45,14 @@ public abstract class MenuElementConfig : ScriptableObject
         }
     }
 
+    protected virtual void OnValidate()
+    {
+        AutoGenerateArgs();
+    }
+
     private void CheckArg(string arg)
     {
-        var method = typeof(MenuButtonConfig).GetMethod(arg, BindingFlags.Instance | BindingFlags.NonPublic);
+        var method = GetType().GetMethod(arg, BindingFlags.Instance | BindingFlags.NonPublic);
         method?.Invoke(this, null);
     }
 }
