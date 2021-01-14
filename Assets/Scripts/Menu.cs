@@ -1,32 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEditor.Events;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    public List<GameObject> buttons = new List<GameObject>();
     public MenuElementConfig[] menuElementConfigs = new MenuElementConfig[2];
     public string label;
-    public int menuButtonToRemove;
     [HideInInspector] public int elementToCreate;
 
-    private void ButtonClick(GameObject otherGameObject)
+    public void ToggleThis()
     {
-        otherGameObject.Toggle();
-        foreach (var button in buttons)
+        var allButtons = GetComponentsInChildren<Button>();
+        foreach (var button in allButtons)
         {
-            if (otherGameObject.transform.parent == button.transform)
+            if (button.transform.parent == transform)
             {
-                button.GetComponent<Image>().Toggle();
+                Debug.Log("Disable");
+                var behaviours = button.GetComponents<Behaviour>();
+                foreach (var behaviour in behaviours)
+                {
+                    behaviour.Toggle();
+                }
                 button.GetComponentInChildren<Text>().Toggle();
             }
-            else button.Toggle();
         }
     }
 
-    public void RemoveButton()
+    /*public void RemoveButton()
     {
         DestroyImmediate(buttons[menuButtonToRemove]);
         buttons.RemoveAt(menuButtonToRemove);
@@ -55,12 +54,4 @@ public class Menu : MonoBehaviour
     {
         elementToCreate = Mathf.Clamp(elementToCreate, 0, menuElementConfigs.Length - 1);
     }
-}
-
-public enum MenuElements
-{
-    Button,
-    Background,
-    Slider,
-    Dropdown,
 }

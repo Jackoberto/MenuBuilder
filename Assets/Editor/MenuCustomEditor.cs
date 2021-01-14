@@ -67,11 +67,6 @@ public class MenuCustomEditor : Editor
                         _index != 0 ? new[] {args[_index]} : new[] {""});
             }
         }
-        
-        if (GUILayout.Button("Remove Button"))
-        {
-            menu.RemoveButton();
-        }
     }
 
     private string[] ResolveTickedArgs(IEnumerable<string> orgStrings)
