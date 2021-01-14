@@ -6,7 +6,8 @@ using UnityEngine.UI;
 [Serializable][CreateAssetMenu]
 public class MenuButtonConfig : MenuElementConfig
 {
-    public override void Awake()
+    private GameObject _button;
+    /*public override void Awake()
     {
         base.Awake();
         if (initialized) return;
@@ -51,12 +52,18 @@ public class MenuButtonConfig : MenuElementConfig
     {
         Debug.Log(MethodBase.GetCurrentMethod().ToString());
         menuElement.GetComponent<RectTransform>().sizeDelta = dimensions;
+    }*/
+
+    public override void Create(string name, Menu menu, string[] args)
+    {
+        _button = Instantiate(objectToCreate, menu.transform);
+        base.Create(name, menu, args);
     }
 
     [ExtraOption("Adds The Start Script To The Button Press")]
     private void AddStart()
     {
-        Debug.Log(MethodBase.GetCurrentMethod().ToString());
+        // Todo Add a startscript _button.AddComponent<StartScript>();
     }
     
     [ExtraOption("Adds A Sub Menu That Opens On Button Press")]
@@ -68,10 +75,10 @@ public class MenuButtonConfig : MenuElementConfig
     [ExtraOption("Adds The Quit Script To The Button Press")]
     private void AddQuit()
     {
-        Debug.Log(MethodBase.GetCurrentMethod().ToString());
+        // Todo Add a quitscript _button.AddComponent<QuitScript>();
     }
     
-    public Vector2 dimensions = new Vector2(100, 100);
+    /*public Vector2 dimensions = new Vector2(100, 100);
     public Color imageColor = new Color(1, 1, 1,1);
     public ColorBlock buttonColorBlock;
     public Sprite image;
@@ -79,6 +86,6 @@ public class MenuButtonConfig : MenuElementConfig
     public TextAnchor textAnchor = TextAnchor.MiddleCenter;
     public Font font;
     public int fontSize = 14;
-    public bool resizeForBestFit;
+    public bool resizeForBestFit;*/
     [HideInInspector] public bool initialized;
 }

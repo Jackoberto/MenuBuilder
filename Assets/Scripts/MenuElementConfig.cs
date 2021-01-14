@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class MenuElementConfig : ScriptableObject
 {
+    public GameObject objectToCreate;
     public string[] Arguments { get; private set; }
     public string[] Descriptions { get; private set; }
     public bool canCombineArgs;

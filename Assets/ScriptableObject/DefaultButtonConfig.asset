@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08cb0ac139c41ec4dac422327e4ba45b, type: 3}
   m_Name: DefaultButtonConfig
   m_EditorClassIdentifier: 
-  canCombineArgs: 1
+  canCombineArgs: 0
   dimensions: {x: 451.62, y: 30}
   imageColor: {r: 1, g: 1, b: 1, a: 1}
   buttonColorBlock:
