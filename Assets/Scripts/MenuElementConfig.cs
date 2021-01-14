@@ -10,18 +10,7 @@ public abstract class MenuElementConfig : ScriptableObject
     public string[] Arguments { get; private set; }
     public string[] Descriptions { get; private set; }
     [HideInInspector] public bool canCombineArgs;
-
-    public virtual void Awake()
-    {
-        
-    }
-
-    protected void AddMenuElement(GameObject gameObject)
-    {
-        var menuElement = gameObject.AddComponent<MenuElement>();
-        menuElement.menuElementConfig = this;
-    }
-
+    
     private void AutoGenerateArgs()
     {
         var methods = GetType().GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic)

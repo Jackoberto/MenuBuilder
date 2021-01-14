@@ -14,7 +14,7 @@ public class Menu : MonoBehaviour
         {
             if (button.transform.parent == transform)
             {
-                button.gameObject.Toggle();
+                button.gameObject.SetActive(!button.gameObject.activeSelf);
             }
         }
     }
