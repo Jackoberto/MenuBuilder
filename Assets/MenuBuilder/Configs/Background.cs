@@ -1,13 +1,15 @@
 ﻿using System;
 using UnityEngine;
 
-[Serializable][CreateAssetMenu]
-public class MenuBackgroundConfig : MenuElementConfig 
+namespace MenuBuilder.Configs
 {
-    private GameObject _backgroundImage;
-    private GameObject _menuHolder;
+    [Serializable][CreateAssetMenu(menuName = "Menu Builder Assets/Background Config")]
+    public class Background : Element 
+    {
+        private GameObject _backgroundImage;
+        private GameObject _menuHolder;
 
-    /*
+        /*
     public Vector2 dimensions = new Vector2(400, 400);
     public Sprite backgroundImage;
     public Color backgroundColor = new Color(0, 0, 0, 1);
@@ -17,16 +19,16 @@ public class MenuBackgroundConfig : MenuElementConfig
     public bool maskable;
     public Vector2 anchoredPos = new Vector2(0, 0);
     */
-    public override void Create(string name, Menu menu, string[] args)
-    {
+        public override void Create(string name, Menu menu, string[] args)
+        {
         
-        _backgroundImage = Instantiate(objectToCreate, menu.transform);
-        _backgroundImage.name = name;
-        _backgroundImage.transform.SetAsFirstSibling();
-        _menuHolder = menu.gameObject;
-        base.Create(name, menu, args);
+            _backgroundImage = Instantiate(objectToCreate, menu.transform);
+            _backgroundImage.name = name;
+            _backgroundImage.transform.SetAsFirstSibling();
+            _menuHolder = menu.gameObject;
+            CheckAllArgs(args);
         
-        /* GameObject image = new GameObject();
+            /* GameObject image = new GameObject();
         image.transform.parent = menu.transform;
         image.name = menu.label;
         image.AddComponent<RectTransform>().sizeDelta = dimensions;
@@ -41,12 +43,13 @@ public class MenuBackgroundConfig : MenuElementConfig
         imageComponent.rectTransform.anchoredPosition = anchoredPos;
         base.Create(name, menu, args); 
         */
-    }
-    [ExtraOption("Makes the background image be the same size as the menu")]
-    private void SameSize()
-    {
-        _backgroundImage.GetComponent<RectTransform>().anchorMin = Vector2.zero;
-        _backgroundImage.GetComponent<RectTransform>().anchorMax = Vector2.one;
-        _backgroundImage.GetComponent<RectTransform>().sizeDelta = Vector2.zero;
+        }
+        [ExtraOption("Makes the background image be the same size as the menu")]
+        private void SameSize()
+        {
+            _backgroundImage.GetComponent<RectTransform>().anchorMin = Vector2.zero;
+            _backgroundImage.GetComponent<RectTransform>().anchorMax = Vector2.one;
+            _backgroundImage.GetComponent<RectTransform>().sizeDelta = Vector2.zero;
+        }
     }
 }
