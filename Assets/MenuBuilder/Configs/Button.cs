@@ -1,7 +1,7 @@
 ﻿using System;
+using UnityEditor;
 using UnityEditor.Events;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace MenuBuilder.Configs
 {
@@ -15,7 +15,7 @@ namespace MenuBuilder.Configs
 
         public override void Create(string name, Menu menu, string[] args)
         {
-            _button = Instantiate(objectToCreate, menu.transform);
+            _button = PrefabUtility.InstantiatePrefab(objectToCreate, menu.transform) as GameObject;
             _button.name = objectToCreate.name;
             _button.GetComponentInChildren<UnityEngine.UI.Text>().text = name;
             _menu = menu;
@@ -60,5 +60,7 @@ namespace MenuBuilder.Configs
             quit.menuHolder = _menu.gameObject;
             UnityEventTools.AddPersistentListener(_button.GetComponent<UnityEngine.UI.Button>().onClick, quit.QuitToConfirmationBox);
         }
+        
+        //TODO Change All Edit Time Instantiates To PrefabUtility.InstantiatePrefab
     }
 }

@@ -22,5 +22,7 @@ namespace MenuBuilder.Configs
             _backgroundImage.GetComponent<RectTransform>().anchorMax = Vector2.one;
             _backgroundImage.GetComponent<RectTransform>().sizeDelta = Vector2.zero;
         }
+        
+        //TODO Change All Edit Time Instantiates To PrefabUtility.InstantiatePrefab
     }
 }

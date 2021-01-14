@@ -10,23 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08cb0ac139c41ec4dac422327e4ba45b, type: 3}
-  m_Name: DefaultButtonConfig
+  m_Name: Default Button Config
   m_EditorClassIdentifier: 
+  objectToCreate: {fileID: 6122665495556805269, guid: 526155ab22f90cc47a9ecda1db763a37, type: 3}
   canCombineArgs: 0
-  dimensions: {x: 451.62, y: 30}
-  imageColor: {r: 1, g: 1, b: 1, a: 1}
-  buttonColorBlock:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  image: {fileID: 0}
-  fontColor: {r: 0, g: 0, b: 0, a: 1}
-  textAnchor: 4
-  font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  fontSize: 14
-  resizeForBestFit: 0
-  initialized: 1
+  submenu: {fileID: 645577536672394793, guid: 11011bcc41a58824cb2e178d6b1e311e, type: 3}
+  confirmationBox: {fileID: 0}

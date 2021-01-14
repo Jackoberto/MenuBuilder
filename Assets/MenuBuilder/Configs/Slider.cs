@@ -19,5 +19,7 @@ namespace MenuBuilder.Configs
          _slider.GetComponent<UnityEngine.UI.Slider>().maxValue = sliderMaximumValue;
          _slider.GetComponent<UnityEngine.UI.Slider>().fillRect.GetComponent<Image>().color = sliderFillColor;
       }
+      
+      //TODO Change All Edit Time Instantiates To PrefabUtility.InstantiatePrefab
    }
 }
