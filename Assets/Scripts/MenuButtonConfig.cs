@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Reflection;
+using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable][CreateAssetMenu]
 public class MenuButtonConfig : MenuElementConfig
 {
+    public GameObject submenu;
     private GameObject _button;
+    private Menu _menu;
     /*public override void Awake()
     {
         base.Awake();
@@ -57,25 +59,38 @@ public class MenuButtonConfig : MenuElementConfig
     public override void Create(string name, Menu menu, string[] args)
     {
         _button = Instantiate(objectToCreate, menu.transform);
+        _button.name = name;
+        _button.GetComponentInChildren<Text>().text = name;
+        _menu = menu;
         base.Create(name, menu, args);
     }
 
     [ExtraOption("Adds The Start Script To The Button Press")]
     private void AddStart()
     {
-        // Todo Add a startscript _button.AddComponent<StartScript>();
+        var start = _button.AddComponent<StartScript>();
+        UnityEventTools.AddPersistentListener(_button.GetComponent<Button>().onClick, start.LoadScene);
     }
     
     [ExtraOption("Adds A Sub Menu That Opens On Button Press")]
     private void AddSubMenu()
     {
-        Debug.Log(MethodBase.GetCurrentMethod().ToString());
+        var newSubmenu = Instantiate(submenu, _menu.transform);
+        var backButton = Instantiate(objectToCreate, newSubmenu.transform);
+        backButton.GetComponentInChildren<Text>().text = "Back";
+        UnityEventTools.AddPersistentListener(_button.GetComponent<Button>().onClick, _menu.ToggleThis);
+        UnityEventTools.AddPersistentListener(backButton.GetComponent<Button>().onClick, _menu.ToggleThis);
+        UnityEventTools.AddBoolPersistentListener(_button.GetComponent<Button>().onClick, newSubmenu.gameObject.SetActive, true);
+        UnityEventTools.AddBoolPersistentListener(backButton.GetComponent<Button>().onClick, newSubmenu.gameObject.SetActive, false);
+        newSubmenu.transform.position = _menu.transform.position;
+        newSubmenu.SetActive(false);
     }
 
     [ExtraOption("Adds The Quit Script To The Button Press")]
     private void AddQuit()
     {
-        // Todo Add a quitscript _button.AddComponent<QuitScript>();
+        var quit = _button.AddComponent<QuitScript>();
+        UnityEventTools.AddPersistentListener(_button.GetComponent<Button>().onClick, quit.Quit);
     }
     
     [ExtraOption("Adds The Quit Script With A Confirmation Popup To The Button Press")]
