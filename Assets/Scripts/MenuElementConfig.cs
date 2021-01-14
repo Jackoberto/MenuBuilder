@@ -14,20 +14,6 @@ public abstract class MenuElementConfig : ScriptableObject
     {
         AutoGenerateArgs();
     }
-    
-    public virtual void UpdateElements()
-    {
-        var menuElements = FindObjectsOfType<MenuElement>().ToList();
-        foreach (var menuElement in menuElements.Where(menuElement => menuElement.menuElementConfig == this))
-        {
-            ApplyUpdate(menuElement);
-        }
-    }
-
-    public virtual void ApplyUpdate(MenuElement menuElement)
-    {
-        
-    }
 
     protected void AddMenuElement(GameObject gameObject)
     {
