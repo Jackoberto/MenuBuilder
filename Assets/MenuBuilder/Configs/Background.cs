@@ -23,7 +23,7 @@ namespace MenuBuilder.Configs
         {
         
             _backgroundImage = Instantiate(objectToCreate, menu.transform);
-            _backgroundImage.name = name;
+            _backgroundImage.name = objectToCreate.name;
             _backgroundImage.transform.SetAsFirstSibling();
             _menuHolder = menu.gameObject;
             CheckAllArgs(args);
