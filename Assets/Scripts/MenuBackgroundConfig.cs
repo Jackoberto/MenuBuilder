@@ -1,12 +1,12 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 [Serializable][CreateAssetMenu]
 public class MenuBackgroundConfig : MenuElementConfig 
 {
-    
     private GameObject _backgroundImage;
+    private GameObject _menuHolder;
+
     /*
     public Vector2 dimensions = new Vector2(400, 400);
     public Sprite backgroundImage;
@@ -23,6 +23,7 @@ public class MenuBackgroundConfig : MenuElementConfig
         _backgroundImage = Instantiate(objectToCreate, menu.transform);
         _backgroundImage.name = name;
         _backgroundImage.transform.SetAsFirstSibling();
+        _menuHolder = menu.gameObject;
         base.Create(name, menu, args);
         
         /* GameObject image = new GameObject();
@@ -40,5 +41,12 @@ public class MenuBackgroundConfig : MenuElementConfig
         imageComponent.rectTransform.anchoredPosition = anchoredPos;
         base.Create(name, menu, args); 
         */
+    }
+    [ExtraOption("Makes the background image be the same size as the menu")]
+    private void SameSize()
+    {
+        _backgroundImage.GetComponent<RectTransform>().anchorMin = Vector2.zero;
+        _backgroundImage.GetComponent<RectTransform>().anchorMax = Vector2.one;
+        _backgroundImage.GetComponent<RectTransform>().sizeDelta = Vector2.zero;
     }
 }

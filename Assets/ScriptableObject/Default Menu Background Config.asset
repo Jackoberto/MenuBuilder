@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToCreate: {fileID: 3799695192080305677, guid: a6f83929809791845b911af6dfb1bbed, type: 3}
   canCombineArgs: 0
+  menu: {fileID: 0}
