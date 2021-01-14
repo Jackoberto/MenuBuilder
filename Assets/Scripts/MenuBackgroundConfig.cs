@@ -4,11 +4,9 @@ using UnityEngine;
 [Serializable][CreateAssetMenu]
 public class MenuBackgroundConfig : MenuElementConfig 
 {
-    
     private GameObject _backgroundImage;
     private GameObject _menuHolder;
-    public Menu menu;
-    
+
     /*
     public Vector2 dimensions = new Vector2(400, 400);
     public Sprite backgroundImage;
@@ -47,9 +45,8 @@ public class MenuBackgroundConfig : MenuElementConfig
     [ExtraOption("Makes the background image be the same size as the menu")]
     private void SameSize()
     {
-        _backgroundImage.GetComponent<RectTransform>().sizeDelta = _menuHolder.GetComponent<RectTransform>().sizeDelta;
         _backgroundImage.GetComponent<RectTransform>().anchorMin = Vector2.zero;
         _backgroundImage.GetComponent<RectTransform>().anchorMax = Vector2.one;
-        Debug.Log("Test");
+        _backgroundImage.GetComponent<RectTransform>().sizeDelta = Vector2.zero;
     }
 }
