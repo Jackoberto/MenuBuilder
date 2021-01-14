@@ -9,18 +9,12 @@ public class Menu : MonoBehaviour
 
     public void ToggleThis()
     {
-        var allButtons = GetComponentsInChildren<Button>();
+        var allButtons = GetComponentsInChildren<Button>(true);
         foreach (var button in allButtons)
         {
             if (button.transform.parent == transform)
             {
-                Debug.Log("Disable");
-                var behaviours = button.GetComponents<Behaviour>();
-                foreach (var behaviour in behaviours)
-                {
-                    behaviour.Toggle();
-                }
-                button.GetComponentInChildren<Text>().Toggle();
+                button.gameObject.Toggle();
             }
         }
     }
