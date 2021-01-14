@@ -93,6 +93,12 @@ public class MenuButtonConfig : MenuElementConfig
         UnityEventTools.AddPersistentListener(_button.GetComponent<Button>().onClick, quit.Quit);
     }
     
+    [ExtraOption("Adds The Quit Script With A Confirmation Popup To The Button Press")]
+    private void AddQuitWithConfirmation()
+    {
+        // Todo Add a quitscript _button.AddComponent<QuitScript>();
+    }
+    
     /*public Vector2 dimensions = new Vector2(100, 100);
     public Color imageColor = new Color(1, 1, 1,1);
     public ColorBlock buttonColorBlock;
