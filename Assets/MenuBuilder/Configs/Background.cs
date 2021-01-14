@@ -11,7 +11,7 @@ namespace MenuBuilder.Configs
         {
         
             _backgroundImage = Instantiate(objectToCreate, menu.transform);
-            _backgroundImage.name = name;
+            _backgroundImage.name = objectToCreate.name;
             _backgroundImage.transform.SetAsFirstSibling();
             CheckAllArgs(args);
         }
