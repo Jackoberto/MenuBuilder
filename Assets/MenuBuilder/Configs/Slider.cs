@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,14 +13,12 @@ namespace MenuBuilder.Configs
       public int sliderMaximumValue = 1;
       private GameObject _slider;
       public override void Create(string name, Menu menu, string[] args){
-         _slider = Instantiate(objectToCreate, menu.transform);
+         _slider = PrefabUtility.InstantiatePrefab(objectToCreate, menu.transform) as GameObject;
          _slider.name = name;
          _slider.GetComponent<UnityEngine.UI.Slider>().direction = UnityEngine.UI.Slider.Direction.LeftToRight;
          _slider.GetComponent<UnityEngine.UI.Slider>().minValue = sliderMinimumValue;
          _slider.GetComponent<UnityEngine.UI.Slider>().maxValue = sliderMaximumValue;
          _slider.GetComponent<UnityEngine.UI.Slider>().fillRect.GetComponent<Image>().color = sliderFillColor;
       }
-      
-      //TODO Change All Edit Time Instantiates To PrefabUtility.InstantiatePrefab
    }
 }

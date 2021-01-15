@@ -8,8 +8,8 @@ namespace MenuBuilder
     public class Menu : MonoBehaviour
     {
         public Element[] menuElementConfigs = new Element[2];
-        [Space]
-        public string label;
+        [Space] [Header("Write the objects name")]
+        public string objectName;
         [HideInInspector] public int elementToCreate;
 
         public void ToggleThis()

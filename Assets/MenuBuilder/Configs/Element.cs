@@ -47,7 +47,5 @@ namespace MenuBuilder.Configs
             var method = GetType().GetMethod(arg, BindingFlags.Instance | BindingFlags.NonPublic);
             method?.Invoke(this, null);
         }
-        
-        //TODO Change All Edit Time Instantiates To PrefabUtility.InstantiatePrefab
     }
 }

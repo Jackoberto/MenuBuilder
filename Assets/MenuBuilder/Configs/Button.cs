@@ -16,8 +16,11 @@ namespace MenuBuilder.Configs
         public override void Create(string name, Menu menu, string[] args)
         {
             _button = PrefabUtility.InstantiatePrefab(objectToCreate, menu.transform) as GameObject;
-            _button.name = objectToCreate.name;
-            _button.GetComponentInChildren<UnityEngine.UI.Text>().text = name;
+            if (!string.IsNullOrEmpty(name))
+            {
+                _button.name = name;
+                _button.GetComponentInChildren<UnityEngine.UI.Text>().text = name;
+            }
             _menu = menu;
             CheckAllArgs(args);
         }
@@ -25,6 +28,8 @@ namespace MenuBuilder.Configs
         [ExtraOption("Adds The Start Script To The Button Press")]
         private void AddStart()
         {
+            if (_button.name == objectToCreate.name)
+                _button.name = "Start button";
             var start = _button.AddComponent<StartScript>();
             UnityEventTools.AddPersistentListener(_button.GetComponent<UnityEngine.UI.Button>().onClick, start.LoadScene);
         }
@@ -32,8 +37,8 @@ namespace MenuBuilder.Configs
         [ExtraOption("Adds A Sub Menu That Opens On Button Press")]
         private void AddSubMenu()
         {
-            var newSubmenu = Instantiate(submenu, _menu.transform);
-            var backButton = Instantiate(objectToCreate, newSubmenu.transform);
+            var newSubmenu = PrefabUtility.InstantiatePrefab(submenu, _menu.transform) as GameObject;
+            var backButton = PrefabUtility.InstantiatePrefab(objectToCreate, newSubmenu.transform) as GameObject;
             backButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Back";
             UnityEventTools.AddPersistentListener(_button.GetComponent<UnityEngine.UI.Button>().onClick, _menu.ToggleThis);
             UnityEventTools.AddPersistentListener(backButton.GetComponent<UnityEngine.UI.Button>().onClick, _menu.ToggleThis);
@@ -46,7 +51,8 @@ namespace MenuBuilder.Configs
         [ExtraOption("Adds The Quit Script To The Button Press")]
         private void AddQuit()
         {
-            _button.name = "Quit button";
+            if (_button.name == objectToCreate.name)
+                _button.name = "Quit button";
             var quit = _button.AddComponent<QuitScript>();
             UnityEventTools.AddPersistentListener(_button.GetComponent<UnityEngine.UI.Button>().onClick, quit.Quit);
         }
@@ -54,13 +60,12 @@ namespace MenuBuilder.Configs
         [ExtraOption("Adds The Quit Script With A Confirmation Popup To The Button Press")]
         private void AddQuitWithConfirmation()
         {
-            _button.name = "Quit button";
+            if (_button.name == objectToCreate.name)
+                _button.name = "Quit button";
             var quit = _button.AddComponent<OnQuitPressed>();
             quit.confirmationBox = confirmationBox;
             quit.menuHolder = _menu.gameObject;
             UnityEventTools.AddPersistentListener(_button.GetComponent<UnityEngine.UI.Button>().onClick, quit.QuitToConfirmationBox);
         }
-        
-        //TODO Change All Edit Time Instantiates To PrefabUtility.InstantiatePrefab
     }
 }
