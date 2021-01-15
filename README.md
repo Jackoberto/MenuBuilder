@@ -5,6 +5,9 @@ Unity Plugin MenuBuilder By:
 
 Jack Karlsson, Fredrik Wallander, Simon Magnusson, Eric Sjöberg, Frida Curman, Kalle Jenefors, Sophie Ahlberg
 
+## [Download](https://github.com/Jackoberto/MenuBuilder/raw/main/MenuBuilder.unitypackage)
+
+
 ## Installation + Usage Guide
 For Extended [Installation Guide And Usage](https://docs.google.com/document/d/1hvqBy5Zh6iBI-GP4659pduJMZ2MF5kVik2VWZRg_E8o/edit?usp=sharing)
 
@@ -17,7 +20,7 @@ Choose what you want to add to your menu by dragging the element slider and pres
 
 You can name the object that you want to add or it will be set to a default name. 
 
-The “Default” drop down menu offers different options for every component.
+The “Standard” drop down menu offers different options for every component.
 
 ## Extension Guide
 ### Simple: 
