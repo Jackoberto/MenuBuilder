@@ -38,7 +38,9 @@ namespace MenuBuilder.Configs
         private void AddSubMenu()
         {
             var newSubmenu = PrefabInstantiator.InstantiatePrefab(submenu, _menu.transform) as GameObject;
+            newSubmenu.GetComponent<Menu>().menuElementConfigs = _menu.menuElementConfigs;
             var backButton = PrefabInstantiator.InstantiatePrefab(objectToCreate, newSubmenu.transform) as GameObject;
+            backButton.name = "Back";
             backButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Back";
             EventTools.AddPersistentListener(_button.GetComponent<UnityEngine.UI.Button>().onClick, _menu.ToggleThis);
             EventTools.AddPersistentListener(backButton.GetComponent<UnityEngine.UI.Button>().onClick, _menu.ToggleThis);

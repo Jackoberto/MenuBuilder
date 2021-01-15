@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e6dda0d3e9d4c8d85c9bf72c56cf354, type: 3}
-  m_Name: Default Slider Config
+  m_Name: Standard Slider Config
   m_EditorClassIdentifier: 
   objectToCreate: {fileID: 1485236187145578401, guid: 249de33db39024e29b070502efbda27e, type: 3}
-  canCombineArgs: 0
+  canCombineArgs: 1
   sliderFillColor: {r: 1, g: 1, b: 1, a: 1}
   sliderMinimumValue: 0
   sliderMaximumValue: 10

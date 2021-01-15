@@ -53,7 +53,7 @@ MonoBehaviour:
   menuElementConfigs:
   - {fileID: 0}
   - {fileID: 0}
-  label: 
+  objectName: 
   elementToCreate: 0
 --- !u!114 &5507662965847366569
 MonoBehaviour:
@@ -73,7 +73,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
