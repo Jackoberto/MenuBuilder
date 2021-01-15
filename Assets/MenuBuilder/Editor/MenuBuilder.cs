@@ -31,6 +31,7 @@ namespace MenuBuilder.Editor
             rectTransform.anchorMax = Vector2.one;
             rectTransform.sizeDelta = Vector2.zero;
             rectTransform.anchoredPosition = Vector2.zero;
+            verticalLayoutGroup.spacing = 10;
             verticalLayoutGroup.childForceExpandHeight = false;
             verticalLayoutGroup.childAlignment = TextAnchor.MiddleCenter;
             var allAssetPaths = AssetDatabase.FindAssets("t:"+ nameof(Element));
@@ -44,11 +45,11 @@ namespace MenuBuilder.Editor
         {
             var menu = CreateMenu();
             var button = GetAssetFromName<Button>("Default Button Config");
-            button.Create("Start", menu.GetComponent<Menu>(), new []{"AddStart"});
-            button.Create("Options", menu.GetComponent<Menu>(), new []{"AddSubMenu"});
-            button.Create("Quit", menu.GetComponent<Menu>(), new []{"AddQuit"});
+            button.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Start", menu.GetComponent<Menu>(), new []{"AddStart"});
+            button.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Options", menu.GetComponent<Menu>(), new []{"AddSubMenu"});
+            button.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Quit", menu.GetComponent<Menu>(), new []{"AddQuit"});
             var background = GetAssetFromName<Background>("Default Menu Background Config");
-            background.Create("Background", menu.GetComponent<Menu>(), new []{"SameSize"});
+            background.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Background", menu.GetComponent<Menu>(), new []{"SameSize"});
             return menu;
         }
 
@@ -65,11 +66,12 @@ namespace MenuBuilder.Editor
         {
             var menu = CreateMenu();
             var button = GetAssetFromName<Button>("Default Button Config");
-            button.Create("Start", menu.GetComponent<Menu>(), new []{"AddStart"});
-            button.Create("Options", menu.GetComponent<Menu>(), new []{"AddSubMenu"});
-            button.Create("Quit", menu.GetComponent<Menu>(), new []{"AddQuit"});
+            button.Create(new EditorPrefabInstantiator(), new EditorEventTools(), 
+                 "Start", menu.GetComponent<Menu>(), new []{"AddStart"});
+            button.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Options", menu.GetComponent<Menu>(), new []{"AddSubMenu"});
+            button.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Quit", menu.GetComponent<Menu>(), new []{"AddQuit"});
             var background = GetAssetFromName<Background>("Default Menu Background Config");
-            background.Create("Background", menu.GetComponent<Menu>(), new string[0]);
+            background.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Background", menu.GetComponent<Menu>(), new string[0]);
         }
     }
 }

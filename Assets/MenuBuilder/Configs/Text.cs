@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,11 +10,11 @@ namespace MenuBuilder.Configs
     {
         private GameObject _text;
 
-        public override void Create(string name, Menu menu, string[] args)
+        public override void Create(IPrefabInstantiator prefabInstantiator, IEventTools eventTools, string name, Menu menu, string[] args)
         {
-            _text = PrefabUtility.InstantiatePrefab(objectToCreate, menu.transform) as GameObject;
-            _text.name = name;
-            _text.GetComponent<UnityEngine.UI.Text>().text = name;
+            _text = prefabInstantiator.InstantiatePrefab(objectToCreate, menu.transform);
+            if (!string.IsNullOrEmpty(name))
+                _text.name = name;
             CheckAllArgs(args);
         }
 

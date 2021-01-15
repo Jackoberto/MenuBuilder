@@ -10,6 +10,8 @@ namespace MenuBuilder.Configs
         public GameObject objectToCreate;
         public string[] Arguments { get; private set; }
         public string[] Descriptions { get; private set; }
+        protected IPrefabInstantiator PrefabInstantiator;
+        protected IEventTools EventTools;
         [HideInInspector] public bool canCombineArgs;
     
         private void AutoGenerateArgs()
@@ -27,7 +29,7 @@ namespace MenuBuilder.Configs
             Arguments = args.ToArray();
         }
 
-        public abstract void Create(string name, Menu menu, string[] args);
+        public abstract void Create(IPrefabInstantiator prefabInstantiator, IEventTools eventTools, string name, Menu menu, string[] args);
 
         protected void CheckAllArgs(IEnumerable<string> args)
         {

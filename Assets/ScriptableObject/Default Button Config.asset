@@ -15,4 +15,4 @@ MonoBehaviour:
   objectToCreate: {fileID: 6122665495556805269, guid: 526155ab22f90cc47a9ecda1db763a37, type: 3}
   canCombineArgs: 0
   submenu: {fileID: 645577536672394793, guid: 11011bcc41a58824cb2e178d6b1e311e, type: 3}
-  confirmationBox: {fileID: 0}
+  confirmationBox: {fileID: 4994363949109143925, guid: cd01b7e0643586640a75c8288cc7537a, type: 3}

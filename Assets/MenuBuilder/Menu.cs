@@ -1,6 +1,5 @@
 ﻿using MenuBuilder.Configs;
 using UnityEngine;
-using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
 
 namespace MenuBuilder

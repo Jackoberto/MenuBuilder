@@ -62,10 +62,10 @@ namespace MenuBuilder.Editor
                 {
                     if (menu.menuElementConfigs[menu.elementToCreate].canCombineArgs)
                     {
-                        menu.menuElementConfigs[menu.elementToCreate].Create(menu.objectName, menu, ResolveTickedArgs(args));
+                        menu.menuElementConfigs[menu.elementToCreate].Create(new EditorPrefabInstantiator(), new EditorEventTools(), menu.objectName, menu, ResolveTickedArgs(args));
                     }
                     else
-                        menu.menuElementConfigs[menu.elementToCreate].Create(menu.objectName, menu,
+                        menu.menuElementConfigs[menu.elementToCreate].Create(new EditorPrefabInstantiator(), new EditorEventTools(), menu.objectName, menu,
                             _index != 0 ? new[] {args[_index]} : new[] {""});
                 }
             }
