@@ -6,26 +6,12 @@ namespace MenuBuilder
 {
     public class ConfirmationBox : MonoBehaviour
     {
-        public Button yes;
-        public Button no;
-
         public event Action OnConfirmation;
         public event Action OnCancelled;
 
         public bool addSound;
         public AudioSource audiosource;
         public AudioClip onClickSound;
-    
-        public void Setup()
-        {
-        
-        }
-
-        void Start()
-        {
-        
-        }
-    
 
         private void Update()
         {

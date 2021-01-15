@@ -35,7 +35,7 @@ namespace MenuBuilder.Editor
             if (menu.menuElementConfigs.Length > 0 && menu.menuElementConfigs[menu.elementToCreate] != null)
             {
                 var args = menu.menuElementConfigs[menu.elementToCreate].Arguments.ToList();
-                args.Add("Default");
+                args.Add("Standard");
                 args.Reverse();
                 var toolTips = menu.menuElementConfigs[menu.elementToCreate].Descriptions.ToList();
                 toolTips.Add("Creates The Default Menu Element");
@@ -52,7 +52,7 @@ namespace MenuBuilder.Editor
                 else
                 {
                     _index = EditorGUILayout.Popup(
-                        new GUIContent(args[_index], toolTips[_index]), _index, args.ToArray());
+                        new GUIContent("Object Options", toolTips[_index]), _index, args.ToArray());
                     _index = Mathf.Clamp(_index, 0, args.Count - 1);
                 }
 
