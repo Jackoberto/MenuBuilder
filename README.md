@@ -20,7 +20,7 @@ Choose what you want to add to your menu by dragging the element slider and pres
 
 You can name the object that you want to add or it will be set to a default name. 
 
-The “Default” drop down menu offers different options for every component.
+The “Standard” drop down menu offers different options for every component.
 
 ## Extension Guide
 ### Simple: 
