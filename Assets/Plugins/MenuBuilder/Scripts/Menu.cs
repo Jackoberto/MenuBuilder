@@ -1,6 +1,7 @@
-﻿using MenuBuilder.Configs;
+﻿using System.Collections.Generic;
+using MenuBuilder.Configs;
 using UnityEngine;
-using Button = UnityEngine.UI.Button;
+using UnityEngine.EventSystems;
 
 namespace MenuBuilder
 {
@@ -14,13 +15,18 @@ namespace MenuBuilder
 
         public void ToggleThis()
         {
-            var allButtons = GetComponentsInChildren<Button>(true);
-            foreach (var button in allButtons)
+            var allUIBehaviours = GetComponentsInChildren<UIBehaviour>(true);
+            var allGameObjects = new Dictionary<int, GameObject>();
+            foreach (var UIBehaviour in allUIBehaviours)
             {
-                if (button.transform.parent == transform)
-                {
-                    button.gameObject.SetActive(!button.gameObject.activeSelf);
-                }
+                if (UIBehaviour.transform.parent != transform) continue;
+                if (!allGameObjects.ContainsKey(UIBehaviour.gameObject.GetInstanceID()))
+                    allGameObjects.Add(UIBehaviour.gameObject.GetInstanceID(), UIBehaviour.gameObject);
+            }
+
+            foreach (var pair in allGameObjects)
+            {
+                pair.Value.gameObject.SetActive(!pair.Value.gameObject.activeSelf);
             }
         }
 
