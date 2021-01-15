@@ -6,6 +6,7 @@ namespace MenuBuilder
 {
     public class Menu : MonoBehaviour
     {
+        [Tooltip("Add Scriptable Objects To This List")]
         public Element[] menuElementConfigs = new Element[2];
         [Space] [Header("Write the objects name")]
         public string objectName;

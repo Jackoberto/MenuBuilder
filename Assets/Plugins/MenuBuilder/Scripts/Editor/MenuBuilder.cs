@@ -44,11 +44,11 @@ namespace MenuBuilder.Editor
         private static GameObject CreateMainMenu()
         {
             var menu = CreateMenu();
-            var button = GetAssetFromName<Button>("Default Button Config");
+            var button = GetAssetFromName<Button>("Standard Button Config");
             button.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Start", menu.GetComponent<Menu>(), new []{"AddStart"});
             button.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Options", menu.GetComponent<Menu>(), new []{"AddSubMenu"});
             button.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Quit", menu.GetComponent<Menu>(), new []{"AddQuit"});
-            var background = GetAssetFromName<Background>("Default Menu Background Config");
+            var background = GetAssetFromName<Background>("Standard Menu Background Config");
             background.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Background", menu.GetComponent<Menu>(), new []{"SameSize"});
             return menu;
         }
@@ -65,12 +65,12 @@ namespace MenuBuilder.Editor
         private static void CreatePauseMenu()
         {
             var menu = CreateMenu();
-            var button = GetAssetFromName<Button>("Default Button Config");
+            var button = GetAssetFromName<Button>("Standard Button Config");
             button.Create(new EditorPrefabInstantiator(), new EditorEventTools(), 
                  "Start", menu.GetComponent<Menu>(), new []{"AddStart"});
             button.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Options", menu.GetComponent<Menu>(), new []{"AddSubMenu"});
             button.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Quit", menu.GetComponent<Menu>(), new []{"AddQuit"});
-            var background = GetAssetFromName<Background>("Default Menu Background Config");
+            var background = GetAssetFromName<Background>("Standard Menu Background Config");
             background.Create(new EditorPrefabInstantiator(), new EditorEventTools(),"Background", menu.GetComponent<Menu>(), new string[0]);
         }
     }

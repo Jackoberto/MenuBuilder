@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 
@@ -37,6 +38,11 @@ namespace MenuBuilder.Editor
                 var args = menu.menuElementConfigs[menu.elementToCreate].Arguments.ToList();
                 args.Add("Standard");
                 args.Reverse();
+                var formattedArgs = new List<string>();
+                foreach (var arg in args)
+                {
+                    formattedArgs.Add(SeparateCamelCase(arg));
+                }
                 var toolTips = menu.menuElementConfigs[menu.elementToCreate].Descriptions.ToList();
                 toolTips.Add("Creates The Default Menu Element");
                 toolTips.Reverse();
@@ -46,18 +52,19 @@ namespace MenuBuilder.Editor
                         _optionsTicked = new bool[args.Count];
                     for (var i = 1; i < args.Count; i++)
                     {
-                        _optionsTicked[i] = GUILayout.Toggle(_optionsTicked[i], new GUIContent(args[i], toolTips[i]));
+                        _optionsTicked[i] = GUILayout.Toggle(_optionsTicked[i], new GUIContent(formattedArgs[i], toolTips[i]));
                     }
                 }
                 else
                 {
                     _index = EditorGUILayout.Popup(
-                        new GUIContent("Object Options", toolTips[_index]), _index, args.ToArray());
+                        new GUIContent("Object Options", toolTips[_index]), _index, formattedArgs.ToArray());
                     _index = Mathf.Clamp(_index, 0, args.Count - 1);
                 }
 
                 var subString = $"{menu.menuElementConfigs[menu.elementToCreate].name}";
-                var buttonText = $"Add {subString}";
+                var name = subString.Replace("Config", "");
+                var buttonText = $"Create {name}";
                 if (GUILayout.Button(buttonText))
                 {
                     if (menu.menuElementConfigs[menu.elementToCreate].canCombineArgs)
@@ -74,6 +81,11 @@ namespace MenuBuilder.Editor
         private string[] ResolveTickedArgs(IEnumerable<string> orgStrings)
         {
             return orgStrings.Where((t, i) => _optionsTicked[i]).ToArray();
+        }
+        
+        public static string SeparateCamelCase(string org)
+        {
+            return Regex.Replace(org, @"(\B[A-Z]+?(?=[A-Z][^A-Z])|\B[A-Z]+?(?=[^A-Z]))", " $1");
         }
     }
 }
