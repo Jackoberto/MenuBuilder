@@ -5,6 +5,9 @@ Unity Plugin MenuBuilder By:
 
 Jack Karlsson, Fredrik Wallander, Simon Magnusson, Eric Sjöberg, Frida Curman, Kalle Jenefors, Sophie Ahlberg
 
+## [Download](https://github.com/Jackoberto/MenuBuilder/raw/main/MenuBuilder.unitypackage)
+
+
 ## Installation + Usage Guide
 For Extended [Installation Guide And Usage](https://docs.google.com/document/d/1hvqBy5Zh6iBI-GP4659pduJMZ2MF5kVik2VWZRg_E8o/edit?usp=sharing)
 
