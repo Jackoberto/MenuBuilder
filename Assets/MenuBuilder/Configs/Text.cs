@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,7 @@ namespace MenuBuilder.Configs
 
         public override void Create(string name, Menu menu, string[] args)
         {
-            _text = Instantiate(objectToCreate, menu.transform);
+            _text = PrefabUtility.InstantiatePrefab(objectToCreate, menu.transform) as GameObject;
             _text.name = name;
             _text.GetComponent<UnityEngine.UI.Text>().text = name;
             CheckAllArgs(args);
@@ -23,7 +24,5 @@ namespace MenuBuilder.Configs
         {
             _text.AddComponent<LayoutElement>().ignoreLayout = true;
         }
-        
-        //TODO Change All Edit Time Instantiates To PrefabUtility.InstantiatePrefab
     }
 }

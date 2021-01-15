@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace MenuBuilder.Configs
@@ -10,7 +11,7 @@ namespace MenuBuilder.Configs
         public override void Create(string name, Menu menu, string[] args)
         {
         
-            _backgroundImage = Instantiate(objectToCreate, menu.transform);
+            _backgroundImage = PrefabUtility.InstantiatePrefab(objectToCreate, menu.transform) as GameObject;
             _backgroundImage.name = objectToCreate.name;
             _backgroundImage.transform.SetAsFirstSibling();
             CheckAllArgs(args);
@@ -22,7 +23,5 @@ namespace MenuBuilder.Configs
             _backgroundImage.GetComponent<RectTransform>().anchorMax = Vector2.one;
             _backgroundImage.GetComponent<RectTransform>().sizeDelta = Vector2.zero;
         }
-        
-        //TODO Change All Edit Time Instantiates To PrefabUtility.InstantiatePrefab
     }
 }
